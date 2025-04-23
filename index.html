@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu with Iframe</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <nav class="menu">
+      <button class="menu__item" id="home-button">
+        <span class="text">首頁</span>
+      </button>
+      <button class="menu__item" id="about-button">
+        <span class="text">自我介紹</span>
+      </button>
+      <div class="menu__item" id="portfolio-button">
+        <span class="text">作品集</span>
+        <div class="submenu">
+          <button class="submenu__item" id="week1">第一周</button>
+          <button class="submenu__item" id="week2">第二周</button>
+          <button class="submenu__item" id="week3">第三周</button>
+          <button class="submenu__item" id="week4">第四周</button>
+        </div>
+      </div>
+      <button class="menu__item" id="quiz-button">
+        <span class="text">測驗卷</span>
+      </button>
+      <button class="menu__item" id="video-button">
+        <span class="text">教學影片</span>
+      </button>
+      <div class="menu__border"></div>
+    </nav>
+  
+    <div id="iframe-container">
+      <button id="close-iframe">✖</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

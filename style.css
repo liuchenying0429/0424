@@ -1,0 +1,225 @@
+html {
+
+  box-sizing: border-box;
+  --bgColorMenu: rgba(52, 58, 64, 0.2); /* 修改底色為 #343a40 並設置透明度 */
+  --duration: .7s;    
+  --fontFamily: "標楷體", serif; /* 設置字體為標楷體 */
+
+}
+
+html *,
+html *::before,
+html *::after {
+
+  box-sizing: inherit;
+
+}
+
+body{
+  
+  margin: 0;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffb457;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--duration);
+
+}
+
+#iframe-container {
+  position: absolute;
+  top: calc(50% + 60px); /* 往下移動 60px */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; /* 寬為視窗的 90% */
+  height: 80%; /* 高為視窗的 80% */
+  z-index: 1; /* iframe 層級 */
+  display: none; /* 預設隱藏 */
+}
+
+#iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#close-iframe {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#close-iframe:hover {
+  background: darkred;
+}
+
+.menu {
+  margin: 0;
+  display: flex;
+  width: 32.05em;
+  font-size: 1.5em;
+  padding: 0 2.85em;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bgColorMenu);
+  font-family: var(--fontFamily);
+  z-index: 2; /* menu 保持在最上層 */
+}
+
+.menu__item {
+  all: unset;
+  flex-grow: 1;
+  z-index: 100;
+  display: flex;
+  cursor: pointer;
+  position: relative;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  will-change: transform;
+  transition: transform var(--timeOut, var(--duration)), background-color var(--duration);
+  pointer-events: auto;
+}
+
+.menu__item::before {
+  content: "";
+  z-index: -1;
+  width: 4.2em;
+  height: 4.2em;
+  border-radius: 50%;
+  position: absolute;
+  transform: scale(0);
+  transition: background-color var(--duration), transform var(--duration);
+}
+
+.menu__item.active {
+  transform: translate3d(0, -0.8em, 0);
+}
+
+.menu__item.active::before {
+  transform: scale(1);
+  background-color: var(--bgColorItem);
+}
+
+.menu__item.active .text {
+  opacity: 1;
+}
+
+.icon{
+  
+  width: 2.6em;
+  height: 2.6em;
+  stroke: white;
+  fill: transparent;
+  stroke-width: 1pt;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 400;
+  
+}
+
+.menu__item.active .icon {
+
+  animation: strok 1.5s reverse;
+  
+}
+
+.text {
+  margin: 0;
+  font-size: 1em;
+  color: black;
+  font-weight: bold;
+  opacity: 0.7;
+  transition: opacity var(--duration);
+  font-family: var(--fontFamily);
+  white-space: nowrap;
+}
+
+@keyframes strok {
+
+  100% {
+
+      stroke-dashoffset: 400;
+
+  }
+
+}
+
+.menu__border{
+
+  left: 0;
+  bottom: 99%;
+  width: 6em; /* 縮小寬度 */
+  height: 1.5em; /* 縮小高度 */
+  position: absolute;
+  clip-path: ellipse(50% 100% at 50% 100%); /* 保持為半圓形 */
+  will-change: transform, background-color; /* 支持位置和顏色的過渡 */
+  background-color: var(--bgColorMenu); /* 使用新的底色 */
+  transition: transform var(--timeOut, var(--duration)), background-color var(--duration);
+  
+}
+
+.svg-container {
+
+  width: 0;
+  height: 0;
+}
+
+.submenu {
+  display: none; /* 預設隱藏 */
+  position: absolute;
+  top: 100%; /* 子選單顯示在主按鈕下方 */
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.2); /* 背景顏色為白色，透明度 0.2 */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 3; /* 確保子選單位於最上層 */
+  font-family: "標楷體", serif; /* 設置字體為標楷體 */
+}
+
+.submenu__item {
+  display: block;
+  padding: 10px 20px;
+  background-color: transparent; /* 子選單項目背景透明 */
+  color: black;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  font-family: "標楷體", serif; /* 設置字體為標楷體 */
+}
+
+.submenu__item:hover {
+  background-color: rgba(255, 255, 255, 0.3); /* 滑鼠懸停時背景顏色稍微加深 */
+}
+
+#portfolio-button:hover .submenu {
+  display: block; /* 滑鼠懸停時顯示子選單 */
+}
+
+@media screen and (max-width: 50em) {
+  .menu{
+      font-size: .8em;
+  }
+}
